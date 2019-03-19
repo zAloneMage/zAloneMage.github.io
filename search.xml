@@ -1,47 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-  
-    
-    <entry>
-      <title>第一次使用hexo踩过的坑</title>
-      <link href="/2019/03/19/%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8hexo%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/"/>
-      <url>/2019/03/19/%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8hexo%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/</url>
-      
-        <content type="html"><![CDATA[<hr><p>思考良久，终于下定决心，建立一个自己的博客，来记录一下自己学习和生活的日常。</p><p>因为之前对hexo有些许了解，这次就依赖于hexo建立自己的博客，不想还是踩了很多的坑，经历了一天的摸黑滚打的填坑爬坑生活后，终于，把blog搭起来了。</p><p>于是，便有了这一篇文章。</p><hr><h2 id="坑1-环境的配置"><a href="#坑1-环境的配置" class="headerlink" title="坑1:环境的配置"></a>坑1:环境的配置</h2><p>使用hexo需要确保环境中有如下应用程序.</p><ul><li><p>Node.js</p><p>  这一项没什么好说的，正常安装就好了.</p></li><li><p>Git</p><p>  这一项坑就出现了，开始我的Git装在D盘，运行Git_bash的那个速度啊，龟速啊，欲哭无泪，开始以为是双显卡的原因，就给它指定了独显，然而，并没有什么用处，然后，卸载重装，第二个坑出现了，用校园网在Git官网的下载速度目不忍睹啊，所以，最好是使用国内的镜像<a href="https://github.com/waylau/git-for-win" target="_blank" rel="noopener">下载</a>，然后装在C盘，运行速度正常。</p></li></ul><h2 id="坑2-建站"><a href="#坑2-建站" class="headerlink" title="坑2:建站"></a>坑2:建站</h2><p>按照Hexo的<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">官方文档</a>生成所需要的目录。然后，就掉坑里了，，，我在执行<code>hexo deploy</code>的时候报错：’cannot find moudle git’，嗯？怎么可能。还好google大法好啊，在博客目录文件夹下执行如下命令行，会安装git依赖的moudle，然后解决掉这个问题:</p><p><code>npm install hexo-deployer-git --save</code></p><h2 id="坑3-commit"><a href="#坑3-commit" class="headerlink" title="坑3:commit"></a>坑3:commit</h2><p>在更新本地的配置文件后，执行<code>hexo deploy</code>没有commit成功，也就是远程文件未更新。可以执行如下命令行解决。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure><h2 id="坑4-MarkdownPad2"><a href="#坑4-MarkdownPad2" class="headerlink" title="坑4:MarkdownPad2"></a>坑4:MarkdownPad2</h2><p>就在我成功搭建成功博客，打开MarkdownPad2洋洋洒洒写下第一篇博客博客的时候，突然发现这个软件在win10下运行滚动滑轮会报错:</p><p>error: An error accurred with the HTML rendering component. This issue may be fixed by installing a missing component.</p><p>好吧，打开弹出的官方网站会有问题的解决方法：<a href="http://markdownpad.com/download/awesomium_v1.6.6_sdk_win.exe" target="_blank" rel="noopener">下载</a>安装Awesomium 1.6.6 SDK。</p>]]></content>
-      
-      
+<search>
+  <entry>
+    <title><![CDATA[第一次使用hexo踩过的坑]]></title>
+    <url>%2F2019%2F03%2F19%2F%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8hexo%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91%2F</url>
+    <content type="text"><![CDATA[思考良久，终于下定决心，建立一个自己的博客，来记录一下自己学习和生活的日常。 因为之前对hexo有些许了解，这次就依赖于hexo建立自己的博客，不想还是踩了很多的坑，经历了一天的摸黑滚打的填坑爬坑生活后，终于，把blog搭起来了。 于是，便有了这一篇文章。 坑1:环境的配置使用hexo需要确保环境中有如下应用程序. Node.js 这一项没什么好说的，正常安装就好了. Git 这一项坑就出现了，开始我的Git装在D盘，运行Git_bash的那个速度啊，龟速啊，欲哭无泪，开始以为是双显卡的原因，就给它指定了独显，然而，并没有什么用处，然后，卸载重装，第二个坑出现了，用校园网在Git官网的下载速度目不忍睹啊，所以，最好是使用国内的镜像下载，然后装在C盘，运行速度正常。 坑2:建站按照Hexo的官方文档生成所需要的目录。然后，就掉坑里了，，，我在执行hexo deploy的时候报错：’cannot find moudle git’，嗯？怎么可能。还好google大法好啊，在博客目录文件夹下执行如下命令行，会安装git依赖的moudle，然后解决掉这个问题: npm install hexo-deployer-git --save 坑3:commit在更新本地的配置文件后，执行hexo deploy没有commit成功，也就是远程文件未更新。可以执行如下命令行解决。 12hexo cleanhexo g -d 坑4:MarkdownPad2就在我成功搭建成功博客，打开MarkdownPad2洋洋洒洒写下第一篇博客博客的时候，突然发现这个软件在win10下运行滚动滑轮会报错: error: An error accurred with the HTML rendering component. This issue may be fixed by installing a missing component. 好吧，打开弹出的官方网站会有问题的解决方法：下载安装Awesomium 1.6.6 SDK。]]></content>
       <categories>
-          
-          <category> hexo </category>
-          
+        <category>hexo</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> hexo </tag>
-            
-            <tag> markdown </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Hello World</title>
-      <link href="/2019/03/19/hello-world/"/>
-      <url>/2019/03/19/hello-world/</url>
-      
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-  
-  
+      <tags>
+        <tag>hexo</tag>
+        <tag>markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2019%2F03%2F19%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
 </search>
