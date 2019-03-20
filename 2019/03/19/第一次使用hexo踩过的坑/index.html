@@ -465,7 +465,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.2k</span>
+                <span title="本文字数">1.4k</span>
               
 
               
@@ -521,6 +521,9 @@
 <p><a href="https://github.com/EYHN/hexo-helper-live2d" target="_blank" rel="noopener">官方文档</a>的配置文件copy到_config.yml文件中没有想要的动图出现，查看控制台，发现找不到moudle！！！官方文档中的<code>Model.use</code>的Model竟然不是默认下载的！！！好吧，按照文档的说明下载Model，重新执行如下命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
 <p>关于本插件，不管修改了什么配置，一定要重新执行上述代码，配置才会生效！！</p>
+<p>另外，如果commit后远程网站并无此效果，可以先删除blog文件夹下面的.deploy_git文件夹，然后运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.autocrlf <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>然后再执行上述代码段生效。</p>
 <h2 id="坑5-next6-0-主题"><a href="#坑5-next6-0-主题" class="headerlink" title="坑5:next6.0+主题"></a>坑5:next6.0+主题</h2><p>增加顶部进度条</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pace: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 <p>没用！！！查看console，原来是没有lib/xxx.js文件。google：next6.0+的主题中的很多lib都没掉了，需要自己下载，比如canvas、pace等等。。。好吧，自己上<a href="https://github.com/theme-next" target="_blank" rel="noopener">官网</a>下载解决。</p>
