@@ -103,25 +103,25 @@
 
 
 
-  <meta name="description" content="在刚开始学习c++的时候，遇到了很多的问题，在这里记录一下，可能后期这都不算什么问题了，但是在初期真的是绕到脑壳疼啊。   static返回类型的成员函数必须定义在函数的声明文件中，这是由于static的特性决定的  声明一个类时，如果再类中声明了一个const类型的常量，该常量不能用于初始化数组大小，因为类声明仅仅是声明，并未对该const变量分配内存空间，若想用常量可做如下声明  1stat">
-<meta name="keywords" content="problems,c++,study">
+  <meta name="description" content="主要部分今天使用QtTCP相关的方法时遇到了奇怪的问题，使用QTCPSocket接收数据失败并提示： 1QObject: Cannot create children for a parent that is in a different thread. 根据提示可以很明确的知道是不恰当的使用新的线程开启了TCPServer导致的出错，因为项目需求，该TCPServer是在另一个线程中的，并不在主">
+<meta name="keywords" content="Qt,C++,TCP,线程,problems">
 <meta property="og:type" content="article">
-<meta property="og:title" content="初期学习C++遇到的问题">
-<meta property="og:url" content="http://yoursite.com/2019/03/30/初期学习C-遇到的问题/index.html">
+<meta property="og:title" content="Qt使用QTCPSocket遇到的问题（线程相关)">
+<meta property="og:url" content="http://yoursite.com/2019/04/05/Qt使用QTCPSocket遇到的问题（线程相关/index.html">
 <meta property="og:site_name" content="zAlm&#39;s Blog">
-<meta property="og:description" content="在刚开始学习c++的时候，遇到了很多的问题，在这里记录一下，可能后期这都不算什么问题了，但是在初期真的是绕到脑壳疼啊。   static返回类型的成员函数必须定义在函数的声明文件中，这是由于static的特性决定的  声明一个类时，如果再类中声明了一个const类型的常量，该常量不能用于初始化数组大小，因为类声明仅仅是声明，并未对该const变量分配内存空间，若想用常量可做如下声明  1stat">
+<meta property="og:description" content="主要部分今天使用QtTCP相关的方法时遇到了奇怪的问题，使用QTCPSocket接收数据失败并提示： 1QObject: Cannot create children for a parent that is in a different thread. 根据提示可以很明确的知道是不恰当的使用新的线程开启了TCPServer导致的出错，因为项目需求，该TCPServer是在另一个线程中的，并不在主">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-29T17:34:21.558Z">
+<meta property="og:updated_time" content="2019-04-05T14:52:48.699Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="初期学习C++遇到的问题">
-<meta name="twitter:description" content="在刚开始学习c++的时候，遇到了很多的问题，在这里记录一下，可能后期这都不算什么问题了，但是在初期真的是绕到脑壳疼啊。   static返回类型的成员函数必须定义在函数的声明文件中，这是由于static的特性决定的  声明一个类时，如果再类中声明了一个const类型的常量，该常量不能用于初始化数组大小，因为类声明仅仅是声明，并未对该const变量分配内存空间，若想用常量可做如下声明  1stat">
+<meta name="twitter:title" content="Qt使用QTCPSocket遇到的问题（线程相关)">
+<meta name="twitter:description" content="主要部分今天使用QtTCP相关的方法时遇到了奇怪的问题，使用QTCPSocket接收数据失败并提示： 1QObject: Cannot create children for a parent that is in a different thread. 根据提示可以很明确的知道是不恰当的使用新的线程开启了TCPServer导致的出错，因为项目需求，该TCPServer是在另一个线程中的，并不在主">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/30/初期学习C-遇到的问题/">
+  <link rel="canonical" href="http://yoursite.com/2019/04/05/Qt使用QTCPSocket遇到的问题（线程相关/">
 
 
 
@@ -131,7 +131,7 @@
   };
 </script>
 
-  <title>初期学习C++遇到的问题 | zAlm's Blog</title>
+  <title>Qt使用QTCPSocket遇到的问题（线程相关) | zAlm's Blog</title>
   
 
 
@@ -359,7 +359,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/30/初期学习C-遇到的问题/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/05/Qt使用QTCPSocket遇到的问题（线程相关/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="z.Alm@zhen">
@@ -376,7 +376,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">初期学习C++遇到的问题
+          <h1 class="post-title" itemprop="name headline">Qt使用QTCPSocket遇到的问题（线程相关)
 
               
             
@@ -402,7 +402,7 @@
                 
               
 
-              <time title="创建时间：2019-03-30 00:09:46 / 修改时间：01:34:21" itemprop="dateCreated datePublished" datetime="2019-03-30T00:09:46+08:00">2019-03-30</time>
+              <time title="创建时间：2019-04-05 22:35:55 / 修改时间：22:52:48" itemprop="dateCreated datePublished" datetime="2019-04-05T22:35:55+08:00">2019-04-05</time>
             
 
             
@@ -424,7 +424,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/c/" itemprop="url" rel="index"><span itemprop="name">c++</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a></span>
 
                 
                 
@@ -453,7 +453,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.4k</span>
+                <span title="本文字数">1.1k</span>
               
 
               
@@ -487,66 +487,21 @@
       
 
       
-        <hr>
-<p>在刚开始学习c++的时候，遇到了很多的问题，在这里记录一下，可能后期这都不算什么问题了，但是在初期真的是绕到脑壳疼啊。</p>
-<hr>
-<ol>
-<li><p>static返回类型的成员函数必须定义在函数的声明文件中，这是由于static的特性决定的</p>
-</li>
-<li><p>声明一个类时，如果再类中声明了一个const类型的常量，该常量不能用于初始化数组大小，因为类声明仅仅是声明，并未对该const变量分配内存空间，若想用常量可做如下声明</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">static const arrSize = 5;</span><br></pre></td></tr></table></figure>
-<p> 因为此时声明的变量被存储在static类型的内存空间中，不在类的内存块中，也可以使用枚举类型解决该问题</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enum&#123;arrSize = 5&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Argument—-实参,parameter—-形参</p>
-</li>
-<li><p>成员函数后面加const关键字作用是进制修改类的成员，eg:</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void fun() const;</span><br></pre></td></tr></table></figure>
-<p> 该方法用来解决访问const类型的成员的问题，</p>
-</li>
-<li><p>运算符重载，只能使用友元函数或者成员函数一种</p>
-</li>
-<li><p>返回值是类对象，会默认调用复制构造函数，但是g++做了优化，返回值为对象时不再产生临时对象，因此不会调用，取消优化命令为:</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -fno-elide-constructors a.cpp</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>函数返回值时创建的临时变量在表达式结束时就销毁</p>
-</li>
-<li><p>指针：int <em> p[] ， int (</em>p)[]</p>
-</li>
-<li><p>如下代码段：</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const char *p = “hello world”,</span><br></pre></td></tr></table></figure>
-<p> 一定使用const限定符，若不使用，也不能修改p所指向的字符串的内容，但p本身的指向的地址可以修改</p>
-</li>
-<li><p>复制构造函数：当存在指针赋值或者静态成员变量更新的时候要进行显示的定义复制构造函数</p>
-</li>
-<li><p>类的成员函数不占用内存空间，同一个类的所有对象调用成员函数都是同一个函数入口地址</p>
-</li>
-<li><p>成员初始化列表，初始化的顺序是类中变量声明的顺序，而不是初始化成员列表的顺序</p>
-</li>
-<li><p>继承关系：is-a关系，has-a关系，use-a关系，is-implemented关系，所有一切的关系最好均使用is-a关系</p>
-</li>
-<li><p>继承的作用强度：private &gt; protected &gt; public，派生类继承基类，在构造函数中使用成员初始化列表的方法初始化基类的私有成员</p>
-</li>
-<li><p>复制构造函数：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Inheritance:: Inheritance(const Inheritance &amp;i) : Base(i)&#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>函数初始化列表Base(i)使用了基类的复制构造函数，传入的参数类型为 指向继承类的基类引用。</p>
-</li>
-<li><p>在提供了带参数的构造函数后，默认的构造函数就不会自动提供了，必须自己提供</p>
-</li>
-<li><p>友元函数重载运算符或者成员函数重载运算符，这两种方法对同一运算符只能用一个</p>
-</li>
-<li><p>向上类型转换，基类指针（引用）指向派生类</p>
-</li>
-<li><p>模板类的声明和定义一定放在同一个文件中，否则会报错</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">undefined reference to this <span class="keyword">function</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>当new请求不到内存量时，会引发bad_alloc异常，可以理解为堆内存空间使用完了，一般来讲是死循环或者忘记delete所引发的异常</p>
-</li>
-<li><p>智能指针auto_ptr,shared_ptr,unique_ptr.auto_ptr指针赋值调用默认析构函数会出现重复释放内存的问</p>
-</li>
-<li><p>移动语义部分和右值引用部分没学习，等待后期学</p>
-</li>
-</ol>
+        <h1 id="主要部分"><a href="#主要部分" class="headerlink" title="主要部分"></a>主要部分</h1><p>今天使用QtTCP相关的方法时遇到了奇怪的问题，使用QTCPSocket接收数据失败并提示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QObject: Cannot create children <span class="keyword">for</span> a parent that is <span class="keyword">in</span> a different thread.</span><br></pre></td></tr></table></figure>
+<p>根据提示可以很明确的知道是不恰当的使用新的线程开启了TCPServer导致的出错，因为项目需求，该TCPServer是在另一个线程中的，并不在主线程，据此查找代码中的原因，发现实自己对信号的槽的理解有所缺陷。</p>
+<p>具体的原因：信号与槽分别处于主线程和从线程，信号与槽不在一个线程上。由于Qt要求一个QObject的子对象必须与它们的父对象在同一个线程中，也就是说不能使用<code>QObject::moveToThread()</code>方法作用于有不同父对象的的对象； 这么说很拗口，实际中的提示还会有一行，告诉你这三个线程的ID（主线程，QThread依附的线程，以及信号或者槽的线程），这里没有截图，忘记了，根据上面的原因我们知道出现三个线程ID一定是有问题的，那么为什么会出现三个线程呢，查找代码发现。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class SecondServer : public QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">    SecondServer(QObject *parent = 0);</span><br><span class="line">    ~SecondServer();</span><br></pre></td></tr></table></figure>
+<p>很明显的发现我没有指定TCPClient的继承的QObject的对象，因此在创建TCPClient对象的时候会把它作为没有父对象的对象，这也就是出现三个线程ID的原因，因此将代码改成下面这样</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class SecondServer : public QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">    SecondServer(QObject *parent = 0);</span><br><span class="line">    ~SecondServer();</span><br></pre></td></tr></table></figure>
+<p>并在实例化对象的时候指定父对象：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mySecondServer = new SecondServer(this);</span><br></pre></td></tr></table></figure></p>
+<p>这样创建的SecondServer是依附于父对象的，就不会出现第三个线程ID。</p>
+<h1 id="致歉"><a href="#致歉" class="headerlink" title="致歉"></a>致歉</h1><p>最后，我不是学计算机出身的，很多基本概念讲解的不是很清楚，可能中间很多使用的不是专业术语，也可能会有很多表述出错，请查看本博客的客人们见谅。</p>
+<p>博主在不断学习，一旦发现错误会进行更正~。</p>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><blockquote>
+<p><a href="https://blog.csdn.net/u010111033/article/details/50699191" target="_blank" rel="noopener">https://blog.csdn.net/u010111033/article/details/50699191</a></p>
+<p><a href="https://blog.csdn.net/u010111033/article/details/50699191" target="_blank" rel="noopener">https://blog.csdn.net/u010111033/article/details/50699191</a></p>
+</blockquote>
 
       
     </div>
@@ -570,11 +525,15 @@
       
         <div class="post-tags">
           
+            <a href="/tags/Qt/" rel="tag"># Qt</a>
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+            <a href="/tags/TCP/" rel="tag"># TCP</a>
+          
+            <a href="/tags/线程/" rel="tag"># 线程</a>
+          
             <a href="/tags/problems/" rel="tag"># problems</a>
-          
-            <a href="/tags/c/" rel="tag"># c++</a>
-          
-            <a href="/tags/study/" rel="tag"># study</a>
           
         </div>
       
@@ -587,8 +546,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/19/第一次使用hexo踩过的坑/" rel="next" title="第一次使用hexo踩过的坑">
-                <i class="fa fa-chevron-left"></i> 第一次使用hexo踩过的坑
+              <a href="/2019/03/30/初期学习C-遇到的问题/" rel="next" title="初期学习C++遇到的问题">
+                <i class="fa fa-chevron-left"></i> 初期学习C++遇到的问题
               </a>
             
           </div>
@@ -596,10 +555,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/05/Qt使用QTCPSocket遇到的问题（线程相关/" rel="prev" title="Qt使用QTCPSocket遇到的问题（线程相关)">
-                Qt使用QTCPSocket遇到的问题（线程相关) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -643,8 +598,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -746,6 +710,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#主要部分"><span class="nav-number">1.</span> <span class="nav-text">主要部分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#致歉"><span class="nav-number">2.</span> <span class="nav-text">致歉</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引用"><span class="nav-number">3.</span> <span class="nav-text">引用</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
