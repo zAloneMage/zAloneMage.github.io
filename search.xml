@@ -1,59 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title><![CDATA[解决vps访问scholar.google访问失败的问题]]></title>
-    <url>%2F2019%2F04%2F26%2F%E8%A7%A3%E5%86%B3vps%E8%AE%BF%E9%97%AEscholar-google%E8%AE%BF%E9%97%AE%E5%A4%B1%E8%B4%A5%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[问题在使用vps访问谷歌学术的时候出现了无房访问的现象，如下图： 解决方法强制VPS使用IPv6访问，更改VPS的hosts中指定Google Scholar的IPv6地址，编辑/etc/hosts，在后面加上如下代码后重启VPS： 12345## Scholar 学术搜索2404:6800:4008:c06::be scholar.google.com2404:6800:4008:c06::be scholar.google.com.hk2404:6800:4008:c06::be scholar.google.com.tw2404:6800:4005:805::200e scholar.google.cn #www.google.cn 注意，上述地址可能失效，可以在该网址找到最新地址。 新的问题在解决上述问题后，再次访问Google学术，出现新的问题： 出现该问题的原因是VPS并未开通IPV6。 新问题的解决开通VPS的IPV6：在VPS的Settings中选中IPv6标签栏，点击Assign IPv6 network后自动重启。 附录linux命令行的相关操作 1234ls # 列出当前面目录下的文件cd etc # 转到etc路径下cd ../ # 返回上一路径vi hosts # 使用vim 编辑hosts文件 vim的相关操作 使用 i 进入编辑模式，使用esc退出编辑模式。 12:wq # 保存后退出:q! # 不保存强制退出 引用 http://www.yanglajiao.com/article/lm409/73658105]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[Qt使用QTCPSocket遇到的问题（线程相关)]]></title>
-    <url>%2F2019%2F04%2F05%2FQt%E4%BD%BF%E7%94%A8QTCPSocket%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3%2F</url>
-    <content type="text"><![CDATA[主要部分今天使用QtTCP相关的方法时遇到了奇怪的问题，使用QTCPSocket接收数据失败并提示： 1QObject: Cannot create children for a parent that is in a different thread. 根据提示可以很明确的知道是不恰当的使用新的线程开启了TCPServer导致的出错，因为项目需求，该TCPServer是在另一个线程中的，并不在主线程，据此查找代码中的原因，发现实自己对信号的槽的理解有所缺陷。 具体的原因：信号与槽分别处于主线程和从线程，信号与槽不在一个线程上。由于Qt要求一个QObject的子对象必须与它们的父对象在同一个线程中，也就是说不能使用QObject::moveToThread()方法作用于有不同父对象的的对象； 这么说很拗口，实际中的提示还会有一行，告诉你这三个线程的ID（主线程，QThread依附的线程，以及信号或者槽的线程），这里没有截图，忘记了，根据上面的原因我们知道出现三个线程ID一定是有问题的，那么为什么会出现三个线程呢，查找代码发现。 1234567class SecondServer : public QObject&#123; Q_OBJECTpublic: SecondServer(); ~SecondServer(); 很明显的发现我没有指定TCPClient的继承的QObject的对象，因此在创建TCPClient对象的时候会把它作为没有父对象的对象，这也就是出现三个线程ID的原因，因此将代码改成下面这样 1234567class SecondServer : public QObject&#123; Q_OBJECTpublic: SecondServer(QObject *parent = 0); ~SecondServer(); 并在实例化对象的时候指定父对象：1mySecondServer = new SecondServer(this); 这样创建的SecondServer是依附于父对象的，就不会出现第三个线程ID。 致歉最后，我不是学计算机出身的，很多基本概念讲解的不是很清楚，可能中间很多使用的不是专业术语，也可能会有很多表述出错，请查看本博客的客人们见谅。 博主在不断学习，一旦发现错误会进行更正~。 引用 https://blog.csdn.net/u010111033/article/details/50699191 https://blog.csdn.net/u010111033/article/details/50699191]]></content>
+<search> 
+  
+  
+    
+    <entry>
+      <title>解决vps访问scholar.google访问失败的问题</title>
+      <link href="/2019/04/26/%E8%A7%A3%E5%86%B3vps%E8%AE%BF%E9%97%AEscholar-google%E8%AE%BF%E9%97%AE%E5%A4%B1%E8%B4%A5%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+      <url>/2019/04/26/%E8%A7%A3%E5%86%B3vps%E8%AE%BF%E9%97%AEscholar-google%E8%AE%BF%E9%97%AE%E5%A4%B1%E8%B4%A5%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>在使用vps访问谷歌学术的时候出现了无房访问的现象，如下图：</p><p><img src="/2019/04/26/解决vps访问scholar-google访问失败的问题/1.png" alt="你想要输入的替代文字"></p><h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>强制VPS使用IPv6访问，更改VPS的hosts中指定Google Scholar的IPv6地址，编辑/etc/hosts，在后面加上如下代码后重启VPS：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Scholar 学术搜索</span></span><br><span class="line">2404:6800:4008:c06::be scholar.google.com</span><br><span class="line">2404:6800:4008:c06::be scholar.google.com.hk</span><br><span class="line">2404:6800:4008:c06::be scholar.google.com.tw</span><br><span class="line">2404:6800:4005:805::200e scholar.google.cn <span class="comment">#www.google.cn</span></span><br></pre></td></tr></table></figure><p>注意，上述地址可能失效，可以在该<a href="https://raw.githubusercontent.com/lennylxx/ipv6-hosts/master/hosts" target="_blank" rel="noopener">网址</a>找到最新地址。</p><h1 id="新的问题"><a href="#新的问题" class="headerlink" title="新的问题"></a>新的问题</h1><p>在解决上述问题后，再次访问Google学术，出现新的问题：</p><p><img src="/2019/04/26/解决vps访问scholar-google访问失败的问题/2.png" alt="你想要输入的替代文字"></p><p>出现该问题的原因是VPS并未开通IPV6。</p><h1 id="新问题的解决"><a href="#新问题的解决" class="headerlink" title="新问题的解决"></a>新问题的解决</h1><p>开通VPS的IPV6：在VPS的Settings中选中IPv6标签栏，点击Assign IPv6 network后自动重启。 </p><h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>linux命令行的相关操作</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ls          <span class="comment"># 列出当前面目录下的文件</span></span><br><span class="line"><span class="built_in">cd</span> etc      <span class="comment"># 转到etc路径下</span></span><br><span class="line"><span class="built_in">cd</span> ../      <span class="comment"># 返回上一路径</span></span><br><span class="line">vi hosts    <span class="comment"># 使用vim 编辑hosts文件</span></span><br></pre></td></tr></table></figure><p>vim的相关操作</p><p>使用 <code>i</code> 进入编辑模式，使用esc退出编辑模式。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:wq <span class="comment"># 保存后退出</span></span><br><span class="line">:q! <span class="comment"># 不保存强制退出</span></span><br></pre></td></tr></table></figure><h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><blockquote><p><a href="http://www.yanglajiao.com/article/lm409/73658105" target="_blank" rel="noopener">http://www.yanglajiao.com/article/lm409/73658105</a></p></blockquote>]]></content>
+      
+      
       <categories>
-        <category>Qt</category>
+          
+          <category> vps </category>
+          
       </categories>
-      <tags>
-        <tag>problems</tag>
-        <tag>Qt</tag>
-        <tag>C++</tag>
-        <tag>TCP</tag>
-        <tag>线程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[初期学习C++遇到的问题]]></title>
-    <url>%2F2019%2F03%2F30%2F%E5%88%9D%E6%9C%9F%E5%AD%A6%E4%B9%A0C-%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[在刚开始学习c++的时候，遇到了很多的问题，在这里记录一下，可能后期这都不算什么问题了，但是在初期真的是绕到脑壳疼啊。 static返回类型的成员函数必须定义在函数的声明文件中，这是由于static的特性决定的 声明一个类时，如果再类中声明了一个const类型的常量，该常量不能用于初始化数组大小，因为类声明仅仅是声明，并未对该const变量分配内存空间，若想用常量可做如下声明 1static const arrSize = 5; 因为此时声明的变量被存储在static类型的内存空间中，不在类的内存块中，也可以使用枚举类型解决该问题 1enum&#123;arrSize = 5&#125;; Argument—-实参,parameter—-形参 成员函数后面加const关键字作用是进制修改类的成员，eg: 1void fun() const; 该方法用来解决访问const类型的成员的问题， 运算符重载，只能使用友元函数或者成员函数一种 返回值是类对象，会默认调用复制构造函数，但是g++做了优化，返回值为对象时不再产生临时对象，因此不会调用，取消优化命令为: 1g++ -fno-elide-constructors a.cpp 函数返回值时创建的临时变量在表达式结束时就销毁 指针：int p[] ， int (p)[] 如下代码段： 1const char *p = “hello world”, 一定使用const限定符，若不使用，也不能修改p所指向的字符串的内容，但p本身的指向的地址可以修改 复制构造函数：当存在指针赋值或者静态成员变量更新的时候要进行显示的定义复制构造函数 类的成员函数不占用内存空间，同一个类的所有对象调用成员函数都是同一个函数入口地址 成员初始化列表，初始化的顺序是类中变量声明的顺序，而不是初始化成员列表的顺序 继承关系：is-a关系，has-a关系，use-a关系，is-implemented关系，所有一切的关系最好均使用is-a关系 继承的作用强度：private &gt; protected &gt; public，派生类继承基类，在构造函数中使用成员初始化列表的方法初始化基类的私有成员 复制构造函数： 1Inheritance:: Inheritance(const Inheritance &amp;i) : Base(i)&#123;&#125; 函数初始化列表Base(i)使用了基类的复制构造函数，传入的参数类型为 指向继承类的基类引用。 在提供了带参数的构造函数后，默认的构造函数就不会自动提供了，必须自己提供 友元函数重载运算符或者成员函数重载运算符，这两种方法对同一运算符只能用一个 向上类型转换，基类指针（引用）指向派生类 模板类的声明和定义一定放在同一个文件中，否则会报错 1undefined reference to this function 当new请求不到内存量时，会引发bad_alloc异常，可以理解为堆内存空间使用完了，一般来讲是死循环或者忘记delete所引发的异常 智能指针auto_ptr,shared_ptr,unique_ptr.auto_ptr指针赋值调用默认析构函数会出现重复释放内存的问 移动语义部分和右值引用部分没学习，等待后期学]]></content>
+      
+      
+        <tags>
+            
+            <tag> problems </tag>
+            
+            <tag> vps </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Qt使用QTCPSocket遇到的问题（线程相关)</title>
+      <link href="/2019/04/05/Qt%E4%BD%BF%E7%94%A8QTCPSocket%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3/"/>
+      <url>/2019/04/05/Qt%E4%BD%BF%E7%94%A8QTCPSocket%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3/</url>
+      
+        <content type="html"><![CDATA[<h1 id="主要部分"><a href="#主要部分" class="headerlink" title="主要部分"></a>主要部分</h1><p>今天使用QtTCP相关的方法时遇到了奇怪的问题，使用QTCPSocket接收数据失败并提示：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QObject: Cannot create children <span class="keyword">for</span> a parent that is <span class="keyword">in</span> a different thread.</span><br></pre></td></tr></table></figure><p>根据提示可以很明确的知道是不恰当的使用新的线程开启了TCPServer导致的出错，因为项目需求，该TCPServer是在另一个线程中的，并不在主线程，据此查找代码中的原因，发现实自己对信号的槽的理解有所缺陷。</p><p>具体的原因：信号与槽分别处于主线程和从线程，信号与槽不在一个线程上。由于Qt要求一个QObject的子对象必须与它们的父对象在同一个线程中，也就是说不能使用<code>QObject::moveToThread()</code>方法作用于有不同父对象的的对象； 这么说很拗口，实际中的提示还会有一行，告诉你这三个线程的ID（主线程，QThread依附的线程，以及信号或者槽的线程），这里没有截图，忘记了，根据上面的原因我们知道出现三个线程ID一定是有问题的，那么为什么会出现三个线程呢，查找代码发现。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SecondServer</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    SecondServer();</span><br><span class="line">    ~SecondServer();</span><br></pre></td></tr></table></figure><p>很明显的发现我没有指定TCPClient的继承的QObject的对象，因此在创建TCPClient对象的时候会把它作为没有父对象的对象，这也就是出现三个线程ID的原因，因此将代码改成下面这样</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SecondServer</span> :</span> <span class="keyword">public</span> QObject</span><br><span class="line">&#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    SecondServer(QObject *parent = <span class="number">0</span>);</span><br><span class="line">    ~SecondServer();</span><br></pre></td></tr></table></figure><p>并在实例化对象的时候指定父对象：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mySecondServer = <span class="keyword">new</span> SecondServer(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure></p><p>这样创建的SecondServer是依附于父对象的，就不会出现第三个线程ID。</p><h1 id="致歉"><a href="#致歉" class="headerlink" title="致歉"></a>致歉</h1><p>最后，我不是学计算机出身的，很多基本概念讲解的不是很清楚，可能中间很多使用的不是专业术语，也可能会有很多表述出错，请查看本博客的客人们见谅。</p><p>博主在不断学习，一旦发现错误会进行更正~。</p><h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><blockquote><p><a href="https://blog.csdn.net/u010111033/article/details/50699191" target="_blank" rel="noopener">https://blog.csdn.net/u010111033/article/details/50699191</a></p><p><a href="https://blog.csdn.net/u010111033/article/details/50699191" target="_blank" rel="noopener">https://blog.csdn.net/u010111033/article/details/50699191</a></p></blockquote>]]></content>
+      
+      
       <categories>
-        <category>c++</category>
+          
+          <category> Qt </category>
+          
       </categories>
-      <tags>
-        <tag>c++</tag>
-        <tag>study</tag>
-        <tag>problems</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[第一次使用hexo踩过的坑]]></title>
-    <url>%2F2019%2F03%2F19%2F%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8hexo%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91%2F</url>
-    <content type="text"><![CDATA[思考良久，终于下定决心，建立一个自己的博客，来记录一下自己学习和生活的日常。 因为之前对hexo有些许了解，这次就依赖于hexo建立自己的博客，不想还是踩了很多的坑，经历了一天的摸黑滚打的填坑爬坑生活后，终于，把blog搭起来了。 于是，便有了这一篇文章。 坑1:环境的配置使用hexo需要确保环境中有如下应用程序. Node.js 这一项没什么好说的，正常安装就好了. Git 这一项坑就出现了，开始我的Git装在D盘，运行Git_bash的那个速度啊，龟速啊，欲哭无泪，开始以为是双显卡的原因，就给它指定了独显，然而，并没有什么用处，然后，卸载重装，第二个坑出现了，用校园网在Git官网的下载速度目不忍睹啊，所以，最好是使用国内的镜像下载，然后装在C盘，运行速度正常。 坑2:建站按照Hexo的官方文档生成所需要的目录。然后，就掉坑里了，，，我在执行hexo deploy的时候报错：’cannot find moudle git’，嗯？怎么可能。还好google大法好啊，在博客目录文件夹下执行如下命令行，会安装git依赖的moudle，然后解决掉这个问题: npm install hexo-deployer-git --save 坑3:commit在更新本地的配置文件后，执行hexo deploy没有commit成功，也就是远程文件未更新。可以执行如下命令行解决。 12hexo cleanhexo g -d 坑4:hexo-helper-live2demmm万物皆可萌，blog也是这样的，所以找了这个插件，然后就掉坑了。 官方文档的配置文件copy到_config.yml文件中没有想要的动图出现，查看控制台，发现找不到moudle！！！官方文档中的Model.use的Model竟然不是默认下载的！！！好吧，按照文档的说明下载Model，重新执行如下命令 12hexo cleanhexo g -d 关于本插件，不管修改了什么配置，一定要重新执行上述代码，配置才会生效！！ 另外，如果commit后远程网站并无此效果，可以先删除blog文件夹下面的.deploy_git文件夹，然后运行 1git config --global core.autocrlf false 然后再执行上述代码段生效。 坑5:next6.0+主题增加顶部进度条 1pace: true 没用！！！查看console，原来是没有lib/xxx.js文件。google：next6.0+的主题中的很多lib都没掉了，需要自己下载，比如canvas、pace等等。。。好吧，自己上官网下载解决。 坑6:MarkdownPad2就在我成功搭建成功博客，打开MarkdownPad2洋洋洒洒写下第一篇博客博客的时候，突然发现这个软件在win10下运行滚动滑轮会报错: error: An error accurred with the HTML rendering component. This issue may be fixed by installing a missing component. 好吧，打开弹出的官方网站会有问题的解决方法：下载安装Awesomium 1.6.6 SDK。]]></content>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+            <tag> C++ </tag>
+            
+            <tag> TCP </tag>
+            
+            <tag> 线程 </tag>
+            
+            <tag> problems </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>初期学习C++遇到的问题</title>
+      <link href="/2019/03/30/%E5%88%9D%E6%9C%9F%E5%AD%A6%E4%B9%A0C-%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+      <url>/2019/03/30/%E5%88%9D%E6%9C%9F%E5%AD%A6%E4%B9%A0C-%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<hr><p>在刚开始学习c++的时候，遇到了很多的问题，在这里记录一下，可能后期这都不算什么问题了，但是在初期真的是绕到脑壳疼啊。</p><hr><ol><li><p>static返回类型的成员函数必须定义在函数的声明文件中，这是由于static的特性决定的</p></li><li><p>声明一个类时，如果再类中声明了一个const类型的常量，该常量不能用于初始化数组大小，因为类声明仅仅是声明，并未对该const变量分配内存空间，若想用常量可做如下声明</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">static const arrSize = 5;</span><br></pre></td></tr></table></figure><p> 因为此时声明的变量被存储在static类型的内存空间中，不在类的内存块中，也可以使用枚举类型解决该问题</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enum&#123;arrSize = 5&#125;;</span><br></pre></td></tr></table></figure></li><li><p>Argument—-实参,parameter—-形参</p></li><li><p>成员函数后面加const关键字作用是进制修改类的成员，eg:</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void fun() const;</span><br></pre></td></tr></table></figure><p> 该方法用来解决访问const类型的成员的问题，</p></li><li><p>运算符重载，只能使用友元函数或者成员函数一种</p></li><li><p>返回值是类对象，会默认调用复制构造函数，但是g++做了优化，返回值为对象时不再产生临时对象，因此不会调用，取消优化命令为:</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ -fno-elide-constructors a.cpp</span><br></pre></td></tr></table></figure></li><li><p>函数返回值时创建的临时变量在表达式结束时就销毁</p></li><li><p>指针：int <em> p[] ， int (</em>p)[]</p></li><li><p>如下代码段：</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const char *p = “hello world”,</span><br></pre></td></tr></table></figure><p> 一定使用const限定符，若不使用，也不能修改p所指向的字符串的内容，但p本身的指向的地址可以修改</p></li><li><p>复制构造函数：当存在指针赋值或者静态成员变量更新的时候要进行显示的定义复制构造函数</p></li><li><p>类的成员函数不占用内存空间，同一个类的所有对象调用成员函数都是同一个函数入口地址</p></li><li><p>成员初始化列表，初始化的顺序是类中变量声明的顺序，而不是初始化成员列表的顺序</p></li><li><p>继承关系：is-a关系，has-a关系，use-a关系，is-implemented关系，所有一切的关系最好均使用is-a关系</p></li><li><p>继承的作用强度：private &gt; protected &gt; public，派生类继承基类，在构造函数中使用成员初始化列表的方法初始化基类的私有成员</p></li><li><p>复制构造函数：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Inheritance:: Inheritance(const Inheritance &amp;i) : Base(i)&#123;&#125;</span><br></pre></td></tr></table></figure><p>函数初始化列表Base(i)使用了基类的复制构造函数，传入的参数类型为 指向继承类的基类引用。</p></li><li><p>在提供了带参数的构造函数后，默认的构造函数就不会自动提供了，必须自己提供</p></li><li><p>友元函数重载运算符或者成员函数重载运算符，这两种方法对同一运算符只能用一个</p></li><li><p>向上类型转换，基类指针（引用）指向派生类</p></li><li><p>模板类的声明和定义一定放在同一个文件中，否则会报错</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">undefined reference to this <span class="keyword">function</span></span><br></pre></td></tr></table></figure></li><li><p>当new请求不到内存量时，会引发bad_alloc异常，可以理解为堆内存空间使用完了，一般来讲是死循环或者忘记delete所引发的异常</p></li><li><p>智能指针auto_ptr,shared_ptr,unique_ptr.auto_ptr指针赋值调用默认析构函数会出现重复释放内存的问</p></li><li><p>移动语义部分和右值引用部分没学习，等待后期学</p></li></ol>]]></content>
+      
+      
       <categories>
-        <category>hexo</category>
+          
+          <category> c++ </category>
+          
       </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>markdown</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2019%2F03%2F19%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      
+      
+        <tags>
+            
+            <tag> problems </tag>
+            
+            <tag> c++ </tag>
+            
+            <tag> study </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>第一次使用hexo踩过的坑</title>
+      <link href="/2019/03/19/%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8hexo%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/"/>
+      <url>/2019/03/19/%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8hexo%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91/</url>
+      
+        <content type="html"><![CDATA[<hr><p>思考良久，终于下定决心，建立一个自己的博客，来记录一下自己学习和生活的日常。</p><p>因为之前对hexo有些许了解，这次就依赖于hexo建立自己的博客，不想还是踩了很多的坑，经历了一天的摸黑滚打的填坑爬坑生活后，终于，把blog搭起来了。</p><p>于是，便有了这一篇文章。</p><hr><h1 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h1><h2 id="坑1-环境的配置"><a href="#坑1-环境的配置" class="headerlink" title="坑1:环境的配置"></a>坑1:环境的配置</h2><p>使用hexo需要确保环境中有如下应用程序.</p><ul><li><p>Node.js</p><p>  这一项没什么好说的，正常安装就好了.</p></li><li><p>Git</p><p>  这一项坑就出现了，开始我的Git装在D盘，运行Git_bash的那个速度啊，龟速啊，欲哭无泪，开始以为是双显卡的原因，就给它指定了独显，然而，并没有什么用处，然后，卸载重装，第二个坑出现了，用校园网在Git官网的下载速度目不忍睹啊，所以，最好是使用国内的镜像<a href="https://github.com/waylau/git-for-win" target="_blank" rel="noopener">下载</a>，然后装在C盘，运行速度正常。</p></li></ul><h2 id="坑2-建站"><a href="#坑2-建站" class="headerlink" title="坑2:建站"></a>坑2:建站</h2><p>按照Hexo的<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">官方文档</a>生成所需要的目录。然后，就掉坑里了，，，我在执行<code>hexo deploy</code>的时候报错：’cannot find moudle git’，嗯？怎么可能。还好google大法好啊，在博客目录文件夹下执行如下命令行，会安装git依赖的moudle，然后解决掉这个问题:</p><p><code>npm install hexo-deployer-git --save</code></p><h2 id="坑3-commit"><a href="#坑3-commit" class="headerlink" title="坑3:commit"></a>坑3:commit</h2><p>在更新本地的配置文件后，执行<code>hexo deploy</code>没有commit成功，也就是远程文件未更新。可以执行如下命令行解决。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure><h2 id="坑4-hexo-helper-live2d"><a href="#坑4-hexo-helper-live2d" class="headerlink" title="坑4:hexo-helper-live2d"></a>坑4:hexo-helper-live2d</h2><p>emmm万物皆可萌，blog也是这样的，所以找了这个插件，然后就掉坑了。</p><p><a href="https://github.com/EYHN/hexo-helper-live2d" target="_blank" rel="noopener">官方文档</a>的配置文件copy到_config.yml文件中没有想要的动图出现，查看控制台，发现找不到moudle！！！官方文档中的<code>Model.use</code>的Model竟然不是默认下载的！！！好吧，按照文档的说明下载Model，重新执行如下命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure><p>关于本插件，不管修改了什么配置，一定要重新执行上述代码，配置才会生效！！</p><p>另外，如果commit后远程网站并无此效果，可以先删除blog文件夹下面的.deploy_git文件夹，然后运行</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.autocrlf <span class="literal">false</span></span><br></pre></td></tr></table></figure><p>然后再执行上述代码段生效。</p><h2 id="坑5-next6-0-主题"><a href="#坑5-next6-0-主题" class="headerlink" title="坑5:next6.0+主题"></a>坑5:next6.0+主题</h2><p>增加顶部进度条</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pace: <span class="literal">true</span></span><br></pre></td></tr></table></figure><p>没用！！！查看console，原来是没有lib/xxx.js文件。google：next6.0+的主题中的很多lib都没掉了，需要自己下载，比如canvas、pace等等。。。好吧，自己上<a href="https://github.com/theme-next" target="_blank" rel="noopener">官网</a>下载解决。</p><h2 id="坑6-MarkdownPad2"><a href="#坑6-MarkdownPad2" class="headerlink" title="坑6:MarkdownPad2"></a>坑6:MarkdownPad2</h2><p>就在我成功搭建成功博客，打开MarkdownPad2洋洋洒洒写下第一篇博客博客的时候，突然发现这个软件在win10下运行滚动滑轮会报错:</p><p>error: An error accurred with the HTML rendering component. This issue may be fixed by installing a missing component.</p><p>好吧，打开弹出的官方网站会有问题的解决方法：<a href="http://markdownpad.com/download/awesomium_v1.6.6_sdk_win.exe" target="_blank" rel="noopener">下载</a>安装Awesomium 1.6.6 SDK。</p><h2 id="坑7-插入图片"><a href="#坑7-插入图片" class="headerlink" title="坑7:插入图片"></a>坑7:插入图片</h2><p>Hexo 插入图片的方法：</p><ol><li><p>更改根目录下的配置文件_config.yml，将post_asset_folder设置为true。此时新建文章的时候会同时创建一个同名文件夹用于放图片。执行命令<code>npm install hexo-asset-image --save</code>，下载安装一个可以上传本地图片的插件：</p></li><li><p>使用如下markdown语法插入图片:<br><code>![](test.jpg)</code></p></li></ol><h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><blockquote><p><a href="http://www.mashangxue123.com/Hexo/1322489026.html#1-chuan-tong-markdown-fang-shi" target="_blank" rel="noopener">http://www.mashangxue123.com/Hexo/1322489026.html#1-chuan-tong-markdown-fang-shi</a></p></blockquote>]]></content>
+      
+      
       <categories>
-        <category>hexo</category>
+          
+          <category> hexo </category>
+          
       </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> markdown </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2019/03/19/hello-world/"/>
+      <url>/2019/03/19/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> hexo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
 </search>
