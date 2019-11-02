@@ -25,18 +25,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[查找tensorflow包安装路径的问题]]></title>
-    <url>%2F2019%2F10%2F30%2F%E6%9F%A5%E6%89%BEtensorflow%E5%8C%85%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[在查找tensorflow包的路径的时候发现找不到tensorflow包 环境 ubuntu 18.04 tensorflow-gpu 1.10.0 python 3.6 pip3方法使用如下命令查找12sudo pip3 show tensorflow-gpu # GPU版sudo pip3 show tensorflow # 非GPU版 注意：一定要分清楚自己安装的tensorflow版本，是CPU版本还是GPU版本，否则找不到另外pip show是找不到的 引用 https://www.cnblogs.com/youpeng/p/10887354.html]]></content>
-      <categories>
-        <category>tensorflow</category>
-      </categories>
-      <tags>
-        <tag>deeplearnin</tag>
-        <tag>tensorflow</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[关于配置完成代理后atom无法安装扩展的问题]]></title>
     <url>%2F2019%2F10%2F30%2F%E5%85%B3%E4%BA%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E6%88%90%E4%BB%A3%E7%90%86%E5%90%8Eatom%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85%E6%89%A9%E5%B1%95%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
     <content type="text"><![CDATA[在配置完成proxy代理后，出现了atom无法安装扩展的问题，即使关闭代理，修改配置文件都没有用 原因仅仅属于个人猜测，atom安装扩展应该是通过apm安装的，因此apm的proxy设置可能出了问题 解决方法执行如下命令：12apm congif delete proxyapm congif delete https-proxy 重启atom，至此解决完成 重新设置apm proxy的方法：12apm congif set proxy=http://127.0.0.1:8118apm congif set https-proxy=https://127.0.0.1:8118 上面的8118是端口号，根据自己的电脑进行设置]]></content>
@@ -49,6 +37,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[查找tensorflow包安装路径的问题]]></title>
+    <url>%2F2019%2F10%2F30%2F%E6%9F%A5%E6%89%BEtensorflow%E5%8C%85%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[在查找tensorflow包的路径的时候发现找不到tensorflow包 环境 ubuntu 18.04 tensorflow-gpu 1.10.0 python 3.6 pip3方法使用如下命令查找12sudo pip3 show tensorflow-gpu # GPU版sudo pip3 show tensorflow # 非GPU版 注意：一定要分清楚自己安装的tensorflow版本，是CPU版本还是GPU版本，否则找不到另外pip show是找不到的 引用 https://www.cnblogs.com/youpeng/p/10887354.html]]></content>
+      <categories>
+        <category>tensorflow</category>
+      </categories>
+      <tags>
+        <tag>deeplearning</tag>
+        <tag>tensorflow</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[关于使用tensorboard时，"No dashboards are active for the current data set."错误的问题]]></title>
     <url>%2F2019%2F10%2F30%2F%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8tensorboard%E6%97%B6Nodashboardsareactiveforthecurrentdataset%E9%94%99%E8%AF%AF%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
     <content type="text"><![CDATA[在使用tensorboard命令后，打开浏览器，出现如下界面 tensorboard error 原因 执行如下命令时终端的路径不对 在执行如下命令中的path部分写错了1tensorboard --logdir=path 解决方法 终端的路径应该在日志文件夹的路径中，比如./project/logs/是存放日志的路径，那么终端的路径应该在./project/下 按照1中的路径，tensorboard路径应该写成这样1tensorboard --logdir=logs 注意：logdir=logs的等号两边不能有任何空格 日志文件的生成方法：参考如下代码12writer = tf.summary.FileWriter("../logs", tf.get_default_graph())writer.close()]]></content>
@@ -56,7 +56,7 @@
         <category>tensorflow</category>
       </categories>
       <tags>
-        <tag>deeplearnin</tag>
+        <tag>deeplearning</tag>
         <tag>tensorflow</tag>
       </tags>
   </entry>
